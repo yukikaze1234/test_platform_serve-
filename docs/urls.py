@@ -15,8 +15,9 @@ Including another URLconf
 """
 from docs import views
 from django.urls import path
-from .views import HandleOrthogonal
-
+from .views import OrthogonalApi
+from .views import RedisApi
 urlpatterns = [
-    path('orthogonal/',views.HandleOrthogonal.as_view(),name=""),
+    path('orthogonal/',views.OrthogonalApi.as_view(),name=""),
+    path('redisOption/',views.RedisApi.as_view(),name=""),
 ]
