@@ -20,4 +20,5 @@ from .views import RedisApi
 urlpatterns = [
     path('orthogonal/',views.OrthogonalApi.as_view(),name=""),
     path('redisOption/',views.RedisApi.as_view(),name=""),
+    path('batchRegister/',views.batchRegister.as_view(),name=""),
 ]
