@@ -67,7 +67,6 @@ class batchRegister(APIView):
 
     def get(self, request):
         return Response(data={"方法不对": "使用post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
     def post(self, request):
         data = request.data
         print(data)
@@ -75,22 +74,16 @@ class batchRegister(APIView):
         teacherTel = data[1]
         beginTel = data[2]
         endTel = data[3]
-
         n1 = ['赵', '钱', '孙', '李', '胡', '周', '吴', '魏', '王', '樊', '孙', '邱', '仇']
         n2 = ['小', '中', '大', '一', '二', '三', '四', '五', '六', '七', '九']
         n3 = ['国', '芳', '花', '华', '祯', '东', '我', '杰', '瑶', '光', '毅']
-
         beginTel = int(beginTel)
         endTel = int(endTel)
-        #num = 0
         if sType == '小学学生':
             for i in range(beginTel, endTel+1):
                 username = random.choice(n1) + random.choice(n2) + random.choice(n3)
                 test = BatchRegister()
                 test.register(teacherTel=teacherTel, username=username, parentTel=i)
-                #num += 1
-                print(i)
-            #if num == endTel - beginTel:
             return Response(data={"批量注册成功"}, status=status.HTTP_200_OK)
         else:
             return Response(data={"目前不支持中学学生的批量注册"}, status=status.HTTP_200_OK)
