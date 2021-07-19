@@ -5,7 +5,7 @@ from selenium import webdriver
 class BatchRegister:
     def __init__(self):
         self.driver = webdriver.Chrome()
-        self.url = 'https://ucenter.test.17zuoye.net/login.vpage'
+        self.url = 'xxx' #此为测试换的账号注册地址
         self.driver.maximize_window()
 
     def close(self):
@@ -14,7 +14,7 @@ class BatchRegister:
     def quit(self):
         self.driver.quit()
 
-    def register(self,teacherTel='15934290950',username='胡二四',password='hxd123456',parentTel='12212345572'):
+    def register(self,teacherTel='12211221122',username='胡二四',password='hxd123456',parentTel='12212345572'):
         self.driver.get(url=self.url)
         self.driver.find_element_by_class_name('change-code').click()
         self.driver.find_element_by_link_text('立即注册').click()
