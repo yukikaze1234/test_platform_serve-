@@ -20,6 +20,8 @@ class HandleRedis:
                 return self.rdb
         except Exception as e:
             return {"connection fails":e}
+
+
 #
 # if __name__ == '__main__':
 #     HR = None

@@ -5,6 +5,7 @@ import redis
 from allpairspy import AllPairs
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .RedisPublic import HandleRedis
@@ -69,7 +70,6 @@ class batchRegister(APIView):
         return Response(data={"方法不对": "使用post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
     def post(self, request):
         data = request.data
-        print(data)
         sType = data[0]
         teacherTel = data[1]
         beginTel = data[2]
@@ -87,3 +87,11 @@ class batchRegister(APIView):
             return Response(data={"批量注册成功"}, status=status.HTTP_200_OK)
         else:
             return Response(data={"目前不支持中学学生的批量注册"}, status=status.HTTP_200_OK)
+
+@api_view(['GET','POST'])
+def executeRedis(request):
+    if request.method == 'GET':
+        return Response(data={"方法不对": "使用post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    elif request.method == 'POST':
+        print(request.data)
+        return Response(data={"signal": False}, status=status.HTTP_200_OK)
