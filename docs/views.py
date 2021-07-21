@@ -93,5 +93,26 @@ def executeRedis(request):
     if request.method == 'GET':
         return Response(data={"方法不对": "使用post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
     elif request.method == 'POST':
-        print(request.data)
-        return Response(data={"signal": False}, status=status.HTTP_200_OK)
+        data = request.data
+        host = data['Ip']
+        port = data['Port']
+        password = data['password']
+        decode_responses = True
+        db = data['db']
+        rvalue = data['rvalue']
+        inputkey = data['inputkey']
+        inputvalue = data['inputvalue']
+        othervalue = data['othervalue']
+        conn = HandleRedis.HandleRedis(host, port, db, decode_responses, password).getConnect()
+        if isinstance(conn, redis.StrictRedis):
+            if rvalue == 'set':
+               result = conn.set(inputkey,inputvalue)
+               return Response(data={"msg": result}, status=status.HTTP_200_OK)
+            elif rvalue == 'get':
+               result = conn.get(inputkey)
+               return Response(data={"msg": result}, status=status.HTTP_200_OK)
+            elif rvalue == 'del':
+               result = conn.delete(inputkey)
+               return Response(data={"msg": result}, status=status.HTTP_200_OK)
+        else:
+            return Response(data={"msg": "建立连接失败，请检查redis连接信息"}, status=status.HTTP_200_OK)
